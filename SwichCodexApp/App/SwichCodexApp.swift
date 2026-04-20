@@ -6,7 +6,7 @@ struct SwichCodexApp: App {
     @StateObject private var rootViewModel = RootViewModel.live()
 
     var body: some Scene {
-        WindowGroup("SwichCodex", id: "main") {
+        Window("SwichCodex", id: "main") {
             RootView(viewModel: rootViewModel)
                 .frame(minWidth: 1180, minHeight: 760)
         }
