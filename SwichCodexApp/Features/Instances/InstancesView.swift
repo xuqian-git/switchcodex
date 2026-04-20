@@ -116,7 +116,7 @@ struct InstancesView: View {
                         )
                     }
                     TableColumn("最后启动") { instance in
-                        Text(instance.lastLaunchedAt?.formatted(date: .abbreviated, time: .shortened) ?? "未启动")
+                        Text(instance.lastLaunchedAt.map(AppDateFormatting.display) ?? "未启动")
                             .font(.system(size: 11))
                             .foregroundStyle(.secondary)
                     }
@@ -201,7 +201,7 @@ struct InstancesInspectorView: View {
                     Text("运行信息")
                         .font(.system(size: 20, weight: .semibold))
                     AppDetailRow(title: "实例 ID", value: instance.id)
-                    AppDetailRow(title: "最后启动", value: instance.lastLaunchedAt?.formatted(date: .abbreviated, time: .shortened) ?? "未知")
+                    AppDetailRow(title: "最后启动", value: instance.lastLaunchedAt.map(AppDateFormatting.display) ?? "未知")
                     AppDetailRow(title: "绑定账号 ID", value: instance.bindAccountID ?? "未绑定")
                     Spacer()
                 }

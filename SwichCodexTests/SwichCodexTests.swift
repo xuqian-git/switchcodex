@@ -1,5 +1,6 @@
 import XCTest
 @testable import SwichCodex
+import SQLite3
 
 final class SwichCodexTests: XCTestCase {
     func testMaskEmail() {
@@ -65,5 +66,53 @@ final class SwichCodexTests: XCTestCase {
         let decoded = try JSONDecoder.swichCodex.decode(TrashedSessionManifest.self, from: data)
         XCTAssertEqual(decoded.instanceID, "default")
         XCTAssertEqual(decoded.threadRow.id, "abc")
+    }
+
+    func testSQLiteStoreReadsThreadsWhenOptionalColumnsAreMissing() throws {
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+
+        let dbURL = directory.appendingPathComponent("state_5.sqlite")
+        var db: OpaquePointer?
+        XCTAssertEqual(sqlite3_open(dbURL.path, &db), SQLITE_OK)
+        defer { sqlite3_close(db) }
+
+        let createSQL = """
+        CREATE TABLE threads (
+            id TEXT PRIMARY KEY,
+            rollout_path TEXT NOT NULL,
+            created_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL,
+            source TEXT NOT NULL,
+            model_provider TEXT NOT NULL,
+            cwd TEXT NOT NULL,
+            title TEXT NOT NULL,
+            sandbox_policy TEXT NOT NULL,
+            approval_mode TEXT NOT NULL,
+            tokens_used INTEGER NOT NULL DEFAULT 0,
+            has_user_event INTEGER NOT NULL DEFAULT 0,
+            archived INTEGER NOT NULL DEFAULT 0
+        );
+        """
+        XCTAssertEqual(sqlite3_exec(db, createSQL, nil, nil, nil), SQLITE_OK)
+        let insertSQL = """
+        INSERT INTO threads (
+            id, rollout_path, created_at, updated_at, source, model_provider, cwd, title,
+            sandbox_policy, approval_mode, tokens_used, has_user_event, archived
+        ) VALUES (
+            'session-1', '/tmp/rollout.jsonl', 1, 2, 'codex', 'openai', '/tmp',
+            'Compat Test', '{}', 'never', 42, 1, 0
+        );
+        """
+        XCTAssertEqual(sqlite3_exec(db, insertSQL, nil, nil, nil), SQLITE_OK)
+
+        let rows = try SQLiteStore().readThreads(at: dbURL)
+        XCTAssertEqual(rows.count, 1)
+        XCTAssertEqual(rows[0].id, "session-1")
+        XCTAssertEqual(rows[0].title, "Compat Test")
+        XCTAssertEqual(rows[0].cliVersion, "")
+        XCTAssertEqual(rows[0].memoryMode, "enabled")
+        XCTAssertNil(rows[0].agentPath)
     }
 }

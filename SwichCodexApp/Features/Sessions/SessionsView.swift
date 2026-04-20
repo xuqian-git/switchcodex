@@ -172,7 +172,7 @@ struct SessionsView: View {
                                 }
                                 Spacer()
                                 VStack(alignment: .trailing, spacing: 4) {
-                                    Text(session.updatedAt?.formatted(date: .abbreviated, time: .shortened) ?? "未知")
+                                    Text(AppDateFormatting.display(session.updatedAt))
                                         .font(.system(size: 11, weight: .medium))
                                         .foregroundStyle(.secondary)
                                     AppStatusBadge(text: "\(session.locations.count) 个实例", color: .secondary)
@@ -230,7 +230,7 @@ struct SessionsInspectorView: View {
                             .font(.system(size: 22, weight: .semibold))
                         AppDetailRow(title: "会话 ID", value: session.id)
                         AppDetailRow(title: "工作目录", value: session.cwd)
-                        AppDetailRow(title: "更新时间", value: session.updatedAt?.formatted(date: .abbreviated, time: .shortened) ?? "未知")
+                        AppDetailRow(title: "更新时间", value: AppDateFormatting.display(session.updatedAt))
 
                         VStack(alignment: .leading, spacing: AppSpacing.sm) {
                             Text("所在实例")
@@ -286,7 +286,7 @@ struct SessionTrashSheet: View {
                                 .font(.system(size: 11))
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)
-                            Text(item.deletedAt.formatted(date: .abbreviated, time: .shortened))
+                            Text(AppDateFormatting.display(item.deletedAt))
                                 .font(.system(size: 11))
                                 .foregroundStyle(.secondary)
                         }

@@ -44,15 +44,7 @@ struct SQLiteStore: Sendable {
             throw SQLiteStoreError.openFailed(message(for: db))
         }
         defer { sqlite3_close(db) }
-        let sql = """
-        SELECT id, rollout_path, created_at, updated_at, source, model_provider, cwd, title,
-               sandbox_policy, approval_mode, tokens_used, has_user_event, archived, archived_at,
-               git_sha, git_branch, git_origin_url, cli_version, first_user_message,
-               agent_nickname, agent_role, memory_mode, model, reasoning_effort, agent_path,
-               created_at_ms, updated_at_ms
-        FROM threads
-        ORDER BY updated_at DESC
-        """
+        let sql = try makeReadThreadsSQL(db: db)
         var statement: OpaquePointer?
         guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else {
             throw SQLiteStoreError.prepareFailed(message(for: db))
@@ -211,5 +203,83 @@ struct SQLiteStore: Sendable {
             return String(cString: cString)
         }
         return "unknown sqlite error"
+    }
+
+    private func makeReadThreadsSQL(db: OpaquePointer?) throws -> String {
+        let availableColumns = try threadColumns(in: db)
+        let projections = threadColumnDefinitions.map { definition in
+            availableColumns.contains(definition.name)
+                ? definition.name
+                : "\(definition.defaultSQL) AS \(definition.name)"
+        }
+        return """
+        SELECT \(projections.joined(separator: ", "))
+        FROM threads
+        ORDER BY updated_at DESC
+        """
+    }
+
+    private func threadColumns(in db: OpaquePointer?) throws -> Set<String> {
+        var statement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, "PRAGMA table_info(threads)", -1, &statement, nil) == SQLITE_OK else {
+            throw SQLiteStoreError.prepareFailed(message(for: db))
+        }
+        defer { sqlite3_finalize(statement) }
+
+        var columns: Set<String> = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            if let name = sqlite3_column_text(statement, 1) {
+                columns.insert(String(cString: name))
+            }
+        }
+        return columns
+    }
+}
+
+private struct ThreadColumnDefinition {
+    let name: String
+    let defaultSQL: String
+}
+
+private let threadColumnDefinitions: [ThreadColumnDefinition] = [
+    .init(name: "id", defaultSQL: "''"),
+    .init(name: "rollout_path", defaultSQL: "''"),
+    .init(name: "created_at", defaultSQL: "0"),
+    .init(name: "updated_at", defaultSQL: "0"),
+    .init(name: "source", defaultSQL: "''"),
+    .init(name: "model_provider", defaultSQL: "''"),
+    .init(name: "cwd", defaultSQL: "''"),
+    .init(name: "title", defaultSQL: "''"),
+    .init(name: "sandbox_policy", defaultSQL: "''"),
+    .init(name: "approval_mode", defaultSQL: "''"),
+    .init(name: "tokens_used", defaultSQL: "0"),
+    .init(name: "has_user_event", defaultSQL: "0"),
+    .init(name: "archived", defaultSQL: "0"),
+    .init(name: "archived_at", defaultSQL: "NULL"),
+    .init(name: "git_sha", defaultSQL: "NULL"),
+    .init(name: "git_branch", defaultSQL: "NULL"),
+    .init(name: "git_origin_url", defaultSQL: "NULL"),
+    .init(name: "cli_version", defaultSQL: "''"),
+    .init(name: "first_user_message", defaultSQL: "''"),
+    .init(name: "agent_nickname", defaultSQL: "NULL"),
+    .init(name: "agent_role", defaultSQL: "NULL"),
+    .init(name: "memory_mode", defaultSQL: "'enabled'"),
+    .init(name: "model", defaultSQL: "NULL"),
+    .init(name: "reasoning_effort", defaultSQL: "NULL"),
+    .init(name: "agent_path", defaultSQL: "NULL"),
+    .init(name: "created_at_ms", defaultSQL: "NULL"),
+    .init(name: "updated_at_ms", defaultSQL: "NULL")
+]
+
+extension SQLiteStoreError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case let .openFailed(message):
+            return "SQLite 打开失败：\(message)"
+        case let .prepareFailed(message):
+            return "SQLite 查询准备失败：\(message)"
+        case let .stepFailed(message):
+            return "SQLite 执行失败：\(message)"
+        }
     }
 }

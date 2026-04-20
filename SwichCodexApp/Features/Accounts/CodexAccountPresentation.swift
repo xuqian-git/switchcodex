@@ -227,7 +227,7 @@ enum CodexAccountPresentation {
     }
 
     private static func formatDate(_ value: Date) -> String {
-        value.formatted(date: .abbreviated, time: .shortened)
+        AppDateFormatting.display(value)
     }
 
     private static func codeReviewQuotaItem(from rawDataJSON: String?) -> CodexAccountQuotaPresentation? {
