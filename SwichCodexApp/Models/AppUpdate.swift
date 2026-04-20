@@ -1,5 +1,22 @@
 import Foundation
 
+enum AppBinaryArchitecture: String, Hashable {
+    case arm64
+    case x86_64
+
+    var assetName: String {
+        "swichcodex-macos-\(rawValue).dmg"
+    }
+
+    static var current: AppBinaryArchitecture {
+        #if arch(arm64)
+            .arm64
+        #else
+            .x86_64
+        #endif
+    }
+}
+
 struct AppReleaseAsset: Decodable, Hashable {
     let name: String
     let downloadURL: URL
@@ -25,9 +42,9 @@ struct AppReleaseInfo: Decodable, Hashable, Identifiable {
         tagName.hasPrefix("v") ? String(tagName.dropFirst()) : tagName
     }
 
-    var primaryDMGAsset: AppReleaseAsset? {
-        assets.first { $0.name.lowercased() == "swichcodex-macos.dmg" }
-            ?? assets.first { $0.name.lowercased().hasSuffix(".dmg") }
+    func primaryDMGAsset(for architecture: AppBinaryArchitecture) -> AppReleaseAsset? {
+        assets.first { $0.name.lowercased() == architecture.assetName }
+            ?? assets.first { $0.name.lowercased().hasSuffix(".dmg") && $0.name.localizedCaseInsensitiveContains(architecture.rawValue) }
     }
 
     private enum CodingKeys: String, CodingKey {

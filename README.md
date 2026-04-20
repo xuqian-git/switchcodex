@@ -49,14 +49,22 @@ cd /Users/qian/project/cockpit-tools/swichcodex
 默认输出：
 
 ```text
-dist/swichcodex-macos.dmg
+dist/swichcodex-macos-arm64.dmg
+dist/swichcodex-macos-x86_64.dmg
 ```
 
 脚本会完成以下步骤：
 
-1. 构建 Release 版 `SwichCodex.app`
-2. 生成包含应用本体和 `Applications` 快捷方式的 DMG
+1. 分别构建 `arm64` 和 `x86_64` 的 Release 版 `SwichCodex.app`
+2. 为每个架构生成包含应用本体和 `Applications` 快捷方式的 DMG
 3. 输出到 `dist/`
+
+如需只打单一架构：
+
+```bash
+ARCHS_TO_BUILD=arm64 ./scripts/build_dmg.sh
+ARCHS_TO_BUILD=x86_64 ./scripts/build_dmg.sh
+```
 
 ## 项目结构
 
@@ -73,8 +81,10 @@ scripts/
 
 ## 当前版本
 
-- 版本号：`0.1.0`
-- Release 资产：`swichcodex-macos.dmg`
+- 版本号：`0.1.5`
+- Release 资产：
+  - `swichcodex-macos-arm64.dmg`
+  - `swichcodex-macos-x86_64.dmg`
 
 ## License
 

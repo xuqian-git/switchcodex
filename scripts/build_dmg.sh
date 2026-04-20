@@ -6,47 +6,68 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PROJECT_PATH="$ROOT_DIR/swichcodex.xcodeproj"
 SCHEME="SwichCodex"
 CONFIGURATION="${CONFIGURATION:-Release}"
-DERIVED_DATA_PATH="${DERIVED_DATA_PATH:-$ROOT_DIR/build/DerivedData}"
 BUILD_ROOT="${BUILD_ROOT:-$ROOT_DIR/build}"
 DIST_DIR="${DIST_DIR:-$ROOT_DIR/dist}"
 APP_NAME="SwichCodex.app"
 VOLUME_NAME="${VOLUME_NAME:-SwichCodex}"
-FINAL_DMG_NAME="${FINAL_DMG_NAME:-swichcodex-macos.dmg}"
-APP_PATH="$DERIVED_DATA_PATH/Build/Products/$CONFIGURATION/$APP_NAME"
-STAGING_DIR="$BUILD_ROOT/dmg-staging"
-FINAL_DMG_PATH="$DIST_DIR/$FINAL_DMG_NAME"
+ARCHS_TO_BUILD="${ARCHS_TO_BUILD:-arm64 x86_64}"
 
-rm -rf "$STAGING_DIR"
-rm -f "$FINAL_DMG_PATH"
-mkdir -p "$BUILD_ROOT" "$DIST_DIR" "$STAGING_DIR"
+mkdir -p "$BUILD_ROOT" "$DIST_DIR"
+rm -f "$DIST_DIR/swichcodex-macos.dmg"
 
-echo "==> Building $SCHEME ($CONFIGURATION)"
-xcodebuild \
-  -project "$PROJECT_PATH" \
-  -scheme "$SCHEME" \
-  -configuration "$CONFIGURATION" \
-  -derivedDataPath "$DERIVED_DATA_PATH" \
-  -sdk macosx \
-  CODE_SIGNING_ALLOWED=NO \
-  build
+build_arch() {
+  local arch="$1"
+  local derived_data_path="$BUILD_ROOT/DerivedData-$arch"
+  local app_path="$derived_data_path/Build/Products/$CONFIGURATION/$APP_NAME"
+  local staging_dir="$BUILD_ROOT/dmg-staging-$arch"
+  local final_dmg_path="$DIST_DIR/swichcodex-macos-$arch.dmg"
 
-if [[ ! -d "$APP_PATH" ]]; then
-  echo "Build succeeded but app bundle was not found at: $APP_PATH" >&2
-  exit 1
-fi
+  rm -rf "$derived_data_path" "$staging_dir"
+  rm -f "$final_dmg_path"
+  mkdir -p "$staging_dir"
 
-echo "==> Preparing DMG staging directory"
-cp -R "$APP_PATH" "$STAGING_DIR/"
-ln -s /Applications "$STAGING_DIR/Applications"
+  echo "==> Building $SCHEME ($CONFIGURATION, $arch)"
+  xcodebuild \
+    -project "$PROJECT_PATH" \
+    -scheme "$SCHEME" \
+    -configuration "$CONFIGURATION" \
+    -derivedDataPath "$derived_data_path" \
+    -sdk macosx \
+    -arch "$arch" \
+    CODE_SIGNING_ALLOWED=NO \
+    ONLY_ACTIVE_ARCH=YES \
+    build
 
-echo "==> Creating compressed DMG"
-hdiutil create \
-  -volname "$VOLUME_NAME" \
-  -srcfolder "$STAGING_DIR" \
-  -ov \
-  -fs HFS+ \
-  -format UDZO \
-  -imagekey zlib-level=9 \
-  "$FINAL_DMG_PATH"
+  if [[ ! -d "$app_path" ]]; then
+    echo "Build succeeded but app bundle was not found at: $app_path" >&2
+    exit 1
+  fi
 
-echo "DMG created at: $FINAL_DMG_PATH"
+  echo "==> Preparing DMG staging directory ($arch)"
+  cp -R "$app_path" "$staging_dir/"
+  ln -s /Applications "$staging_dir/Applications"
+
+  echo "==> Creating compressed DMG ($arch)"
+  hdiutil create \
+    -volname "$VOLUME_NAME" \
+    -srcfolder "$staging_dir" \
+    -ov \
+    -fs HFS+ \
+    -format UDZO \
+    -imagekey zlib-level=9 \
+    "$final_dmg_path"
+
+  echo "DMG created at: $final_dmg_path"
+}
+
+for arch in $ARCHS_TO_BUILD; do
+  case "$arch" in
+    arm64|x86_64)
+      build_arch "$arch"
+      ;;
+    *)
+      echo "Unsupported arch: $arch" >&2
+      exit 1
+      ;;
+  esac
+done

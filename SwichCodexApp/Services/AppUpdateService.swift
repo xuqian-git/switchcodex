@@ -28,6 +28,7 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
     private let session: URLSession
     private let owner = "xuqian-git"
     private let repo = "switchcodex"
+    private let architecture = AppBinaryArchitecture.current
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -50,11 +51,11 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
         from release: AppReleaseInfo,
         progress: @escaping @Sendable (_ fractionCompleted: Double, _ status: String) -> Void
     ) async throws {
-        guard let asset = release.primaryDMGAsset else {
+        guard let asset = release.primaryDMGAsset(for: architecture) else {
             throw AppUpdateServiceError.missingDMGAsset
         }
 
-        progress(0.02, "准备下载 \(release.version)…")
+        progress(0.02, "准备下载 \(release.version) \(architecture.rawValue)…")
         let downloadedDMG = try await downloadDMG(from: asset.downloadURL, progress: progress)
         progress(0.82, "正在挂载更新包…")
         let mountedVolume = try mountDMG(at: downloadedDMG)
