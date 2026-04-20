@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02E989B11A4C2F8800A10001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02E989B01A4C2F8800A10001 /* Assets.xcassets */; };
+		07630600AC49FA2502B5CBE4 /* CodexInstanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D157463E42D713336592C5B /* CodexInstanceService.swift */; };
+		07F0EAF710F213A78D84E6F4 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B34BCD753EBB1C03E77C9 /* AppLogger.swift */; };
+		0BD8157246820A7693E433ED /* SwichCodexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C406A10ED3161039CAB558 /* SwichCodexTests.swift */; };
+		0C85CDC8483502FE7B8114F8 /* InstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBC193381302B5E8B30572A /* InstancesView.swift */; };
+		163A3086256C4BC1F46D3E18 /* TomlConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D52A9479326D2ED0DC8C5 /* TomlConfigStore.swift */; };
+		1A3BF84E4D0ECACBCE4BB018 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF626D419DC7348D9B4816D /* RootViewModel.swift */; };
+		1C37673B62C9145A0D74D4A4 /* CodexSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D10DD658B2C89BBBC02FFEB /* CodexSessionService.swift */; };
+		2366BD6F3D191F84ABC7104E /* Masking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B147D99341BDD0774CF1DB1 /* Masking.swift */; };
+		32ADD236E0452FF9329D7BCD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C3F01BBF4B5776CDC371CF /* Protocols.swift */; };
+		35925A98741C164EC52CB852 /* AppDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE5A15045FC398741FF730 /* AppDesign.swift */; };
+		3D924558B5F7BFBE907664A5 /* CodexSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDA7F407F104936427A1D5 /* CodexSession.swift */; };
+		4044056B3542F0365C2006E6 /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86DA3D98DEF8D28CBFDCA1C /* AppComponents.swift */; };
+		4854E8FF0470102D3F4796E6 /* FileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90A04ACFC9D42A71F4D433D /* FileStore.swift */; };
+		49299A30B571542A05E09745 /* CodexInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ABCA4B9F540C03056FD5E5 /* CodexInstance.swift */; };
+		56779054F022A4417347C59B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EE166BA0C6B7E74E32D708 /* RootView.swift */; };
+		57F946593FCDC2F6F8BCBE9D /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715349CDC34A706BCF2779 /* BackupService.swift */; };
+		5809509062112E2DF0191FD6 /* DirectoryMutationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD0F12F8A2AEE600F487F6 /* DirectoryMutationCoordinator.swift */; };
+		588637BCEDDE6CFDA4602C39 /* CodexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22C8AF3F7156A20DEABC0 /* CodexAccount.swift */; };
+		6602905D83A88C0D1A954569 /* SwichCodexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0076FEBE3F0AD2EB62AE52B3 /* SwichCodexApp.swift */; };
+		6779434CE3A1364F6F306978 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11B731FF4EBABFF70A1F41 /* SessionsView.swift */; };
+		7642DC0EEFAA4DF278367FE7 /* SQLiteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B14E871F25A97D32F4183 /* SQLiteStore.swift */; };
+		83AE1B0DF9F59C1AC629AE1A /* OperationFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6EEADE3705827F518F4D90 /* OperationFeedback.swift */; };
+		87917FB16857B0C5F0AD7A60 /* AtomicWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A252DCED6950C761B2213B /* AtomicWriter.swift */; };
+		9C584B5B006738EC842656EB /* AppPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C2315C6AE6AF817267FAC3 /* AppPaths.swift */; };
+		A006D8FDA98945FAEB4B6008 /* InstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3529FD2BBAB612E9AD31F /* InstancesViewModel.swift */; };
+		A2B73F75F76B2BF423A90607 /* CodexAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8DCF62B2B0D869413CFE94 /* CodexAccountService.swift */; };
+		AFC2F5510CC2E5EC56100B77 /* NavigationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5083E9FB44FBCC4A12E57E09 /* NavigationSection.swift */; };
+		B6649A9A10198CD94772EDE4 /* CodexGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E36554C70241770970C2DB /* CodexGroupService.swift */; };
+		CC96C2CEF3AC571AE4BBF844 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEF51F728A362771CA80721 /* AccountsViewModel.swift */; };
+		D3538CBA6E8351968D722B96 /* CodexAccountPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B2194BBB7B59432BA1A1E /* CodexAccountPresentation.swift */; };
+		D6B7A6F09494E1505F9AB1D2 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C7E63E8014227853E960C /* AccountsView.swift */; };
+		D8A8C73E14CBE219433EA561 /* AccountGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B966715995B0C894AA2BEFD /* AccountGroup.swift */; };
+		E9FDC3ECC1E8EA4B115424FB /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F96A5F6C9D05D49DD71E9 /* SessionsViewModel.swift */; };
+		FC2126450E6C8ECB746D1465 /* CodexProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6B853D4F0F20E2A657061 /* CodexProcessService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6B0B3D59A9895064F1D11651 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C1EC51D5B9E614441B66143 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB6D692D55EC8FC4EE7C4531;
+			remoteInfo = SwichCodex;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02E989B01A4C2F8800A10001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0076FEBE3F0AD2EB62AE52B3 /* SwichCodexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwichCodexApp.swift; sourceTree = "<group>"; };
+		035F96A5F6C9D05D49DD71E9 /* SessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
+		1D0B14E871F25A97D32F4183 /* SQLiteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteStore.swift; sourceTree = "<group>"; };
+		1D157463E42D713336592C5B /* CodexInstanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexInstanceService.swift; sourceTree = "<group>"; };
+		24C3F01BBF4B5776CDC371CF /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		2A5B2194BBB7B59432BA1A1E /* CodexAccountPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAccountPresentation.swift; sourceTree = "<group>"; };
+		2B147D99341BDD0774CF1DB1 /* Masking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Masking.swift; sourceTree = "<group>"; };
+		2BEF51F728A362771CA80721 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		2F8DCF62B2B0D869413CFE94 /* CodexAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAccountService.swift; sourceTree = "<group>"; };
+		39EDA7F407F104936427A1D5 /* CodexSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexSession.swift; sourceTree = "<group>"; };
+		3B966715995B0C894AA2BEFD /* AccountGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroup.swift; sourceTree = "<group>"; };
+		4EBC193381302B5E8B30572A /* InstancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstancesView.swift; sourceTree = "<group>"; };
+		5083E9FB44FBCC4A12E57E09 /* NavigationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSection.swift; sourceTree = "<group>"; };
+		58D71FDA59FCAC436E1C9D7F /* SwichCodexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwichCodexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF626D419DC7348D9B4816D /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		60AD0F12F8A2AEE600F487F6 /* DirectoryMutationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMutationCoordinator.swift; sourceTree = "<group>"; };
+		61E36554C70241770970C2DB /* CodexGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexGroupService.swift; sourceTree = "<group>"; };
+		6D10DD658B2C89BBBC02FFEB /* CodexSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexSessionService.swift; sourceTree = "<group>"; };
+		7F6B34BCD753EBB1C03E77C9 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		85C2315C6AE6AF817267FAC3 /* AppPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPaths.swift; sourceTree = "<group>"; };
+		871697FDABC2C262E53B2BD8 /* SwichCodex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwichCodex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		981D52A9479326D2ED0DC8C5 /* TomlConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomlConfigStore.swift; sourceTree = "<group>"; };
+		A90A04ACFC9D42A71F4D433D /* FileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStore.swift; sourceTree = "<group>"; };
+		AA715349CDC34A706BCF2779 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
+		B0EE166BA0C6B7E74E32D708 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B7A252DCED6950C761B2213B /* AtomicWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicWriter.swift; sourceTree = "<group>"; };
+		BE11B731FF4EBABFF70A1F41 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
+		C4CE5A15045FC398741FF730 /* AppDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDesign.swift; sourceTree = "<group>"; };
+		C7C406A10ED3161039CAB558 /* SwichCodexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwichCodexTests.swift; sourceTree = "<group>"; };
+		D2C6B853D4F0F20E2A657061 /* CodexProcessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexProcessService.swift; sourceTree = "<group>"; };
+		D8D22C8AF3F7156A20DEABC0 /* CodexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAccount.swift; sourceTree = "<group>"; };
+		DF8C7E63E8014227853E960C /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
+		E7ABCA4B9F540C03056FD5E5 /* CodexInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexInstance.swift; sourceTree = "<group>"; };
+		EEA3529FD2BBAB612E9AD31F /* InstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstancesViewModel.swift; sourceTree = "<group>"; };
+		F86DA3D98DEF8D28CBFDCA1C /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
+		FA6EEADE3705827F518F4D90 /* OperationFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFeedback.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		11055431669A74002D5FFB7B /* SwichCodexTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7C406A10ED3161039CAB558 /* SwichCodexTests.swift */,
+			);
+			path = SwichCodexTests;
+			sourceTree = "<group>";
+		};
+		349019BB3B7DC16CC8AFD545 = {
+			isa = PBXGroup;
+			children = (
+				A4870AA323CBC3326AB56982 /* SwichCodexApp */,
+				11055431669A74002D5FFB7B /* SwichCodexTests */,
+				68A9A1BEF1787E7237831439 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43FE9079333FF2567D24C104 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C4CE5A15045FC398741FF730 /* AppDesign.swift */,
+				7F6B34BCD753EBB1C03E77C9 /* AppLogger.swift */,
+				85C2315C6AE6AF817267FAC3 /* AppPaths.swift */,
+				2B147D99341BDD0774CF1DB1 /* Masking.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		49236440E9A63ADE2C69161E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AF4FF16A6F05574D7A2161E7 /* Accounts */,
+				D9C39789B964A09AD8BC3CD7 /* Instances */,
+				E458AB9470AF567E5837BEC0 /* Sessions */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5AB584776163BAED1992A177 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B0EE166BA0C6B7E74E32D708 /* RootView.swift */,
+				5EF626D419DC7348D9B4816D /* RootViewModel.swift */,
+				0076FEBE3F0AD2EB62AE52B3 /* SwichCodexApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		66ADD8A830C1D9CCE01368FB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2F8DCF62B2B0D869413CFE94 /* CodexAccountService.swift */,
+				61E36554C70241770970C2DB /* CodexGroupService.swift */,
+				1D157463E42D713336592C5B /* CodexInstanceService.swift */,
+				D2C6B853D4F0F20E2A657061 /* CodexProcessService.swift */,
+				6D10DD658B2C89BBBC02FFEB /* CodexSessionService.swift */,
+				24C3F01BBF4B5776CDC371CF /* Protocols.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		679A642548038BD765E6B365 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				B7A252DCED6950C761B2213B /* AtomicWriter.swift */,
+				AA715349CDC34A706BCF2779 /* BackupService.swift */,
+				60AD0F12F8A2AEE600F487F6 /* DirectoryMutationCoordinator.swift */,
+				A90A04ACFC9D42A71F4D433D /* FileStore.swift */,
+				1D0B14E871F25A97D32F4183 /* SQLiteStore.swift */,
+				981D52A9479326D2ED0DC8C5 /* TomlConfigStore.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		68A9A1BEF1787E7237831439 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				871697FDABC2C262E53B2BD8 /* SwichCodex.app */,
+				58D71FDA59FCAC436E1C9D7F /* SwichCodexTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4870AA323CBC3326AB56982 /* SwichCodexApp */ = {
+			isa = PBXGroup;
+			children = (
+				5AB584776163BAED1992A177 /* App */,
+				F39DE86A8A5643BC2E824D2D /* Components */,
+				49236440E9A63ADE2C69161E /* Features */,
+				679A642548038BD765E6B365 /* Infrastructure */,
+				C0949F4C23080C1EEC2B9E1C /* Models */,
+				02E989B21A4C2F8800A10001 /* Resources */,
+				66ADD8A830C1D9CCE01368FB /* Services */,
+				43FE9079333FF2567D24C104 /* Utilities */,
+			);
+			path = SwichCodexApp;
+			sourceTree = "<group>";
+		};
+		02E989B21A4C2F8800A10001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				02E989B01A4C2F8800A10001 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AF4FF16A6F05574D7A2161E7 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				DF8C7E63E8014227853E960C /* AccountsView.swift */,
+				2BEF51F728A362771CA80721 /* AccountsViewModel.swift */,
+				2A5B2194BBB7B59432BA1A1E /* CodexAccountPresentation.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		C0949F4C23080C1EEC2B9E1C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B966715995B0C894AA2BEFD /* AccountGroup.swift */,
+				D8D22C8AF3F7156A20DEABC0 /* CodexAccount.swift */,
+				E7ABCA4B9F540C03056FD5E5 /* CodexInstance.swift */,
+				39EDA7F407F104936427A1D5 /* CodexSession.swift */,
+				5083E9FB44FBCC4A12E57E09 /* NavigationSection.swift */,
+				FA6EEADE3705827F518F4D90 /* OperationFeedback.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D9C39789B964A09AD8BC3CD7 /* Instances */ = {
+			isa = PBXGroup;
+			children = (
+				4EBC193381302B5E8B30572A /* InstancesView.swift */,
+				EEA3529FD2BBAB612E9AD31F /* InstancesViewModel.swift */,
+			);
+			path = Instances;
+			sourceTree = "<group>";
+		};
+		E458AB9470AF567E5837BEC0 /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				BE11B731FF4EBABFF70A1F41 /* SessionsView.swift */,
+				035F96A5F6C9D05D49DD71E9 /* SessionsViewModel.swift */,
+			);
+			path = Sessions;
+			sourceTree = "<group>";
+		};
+		F39DE86A8A5643BC2E824D2D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F86DA3D98DEF8D28CBFDCA1C /* AppComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB6D692D55EC8FC4EE7C4531 /* SwichCodex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B8FE640F791AD03CD01F649 /* Build configuration list for PBXNativeTarget "SwichCodex" */;
+			buildPhases = (
+				02E989B31A4C2F8800A10001 /* Resources */,
+				D65228CD681BC7DF1C32B759 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwichCodex;
+			packageProductDependencies = (
+			);
+			productName = SwichCodex;
+			productReference = 871697FDABC2C262E53B2BD8 /* SwichCodex.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C452BBA327B880CCB6E9DF9D /* SwichCodexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0EE524A7713A654071A5877 /* Build configuration list for PBXNativeTarget "SwichCodexTests" */;
+			buildPhases = (
+				789F6B16594F832AE7339700 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				556D8270C43441BF4234ACC7 /* PBXTargetDependency */,
+			);
+			name = SwichCodexTests;
+			packageProductDependencies = (
+			);
+			productName = SwichCodexTests;
+			productReference = 58D71FDA59FCAC436E1C9D7F /* SwichCodexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6C1EC51D5B9E614441B66143 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					AB6D692D55EC8FC4EE7C4531 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B7DD303A6B1312C25DEF9477 /* Build configuration list for PBXProject "swichcodex" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 349019BB3B7DC16CC8AFD545;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 54;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB6D692D55EC8FC4EE7C4531 /* SwichCodex */,
+				C452BBA327B880CCB6E9DF9D /* SwichCodexTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02E989B31A4C2F8800A10001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02E989B11A4C2F8800A10001 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		789F6B16594F832AE7339700 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BD8157246820A7693E433ED /* SwichCodexTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D65228CD681BC7DF1C32B759 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8A8C73E14CBE219433EA561 /* AccountGroup.swift in Sources */,
+				D6B7A6F09494E1505F9AB1D2 /* AccountsView.swift in Sources */,
+				CC96C2CEF3AC571AE4BBF844 /* AccountsViewModel.swift in Sources */,
+				4044056B3542F0365C2006E6 /* AppComponents.swift in Sources */,
+				35925A98741C164EC52CB852 /* AppDesign.swift in Sources */,
+				07F0EAF710F213A78D84E6F4 /* AppLogger.swift in Sources */,
+				9C584B5B006738EC842656EB /* AppPaths.swift in Sources */,
+				87917FB16857B0C5F0AD7A60 /* AtomicWriter.swift in Sources */,
+				57F946593FCDC2F6F8BCBE9D /* BackupService.swift in Sources */,
+				588637BCEDDE6CFDA4602C39 /* CodexAccount.swift in Sources */,
+				D3538CBA6E8351968D722B96 /* CodexAccountPresentation.swift in Sources */,
+				A2B73F75F76B2BF423A90607 /* CodexAccountService.swift in Sources */,
+				B6649A9A10198CD94772EDE4 /* CodexGroupService.swift in Sources */,
+				49299A30B571542A05E09745 /* CodexInstance.swift in Sources */,
+				07630600AC49FA2502B5CBE4 /* CodexInstanceService.swift in Sources */,
+				FC2126450E6C8ECB746D1465 /* CodexProcessService.swift in Sources */,
+				3D924558B5F7BFBE907664A5 /* CodexSession.swift in Sources */,
+				1C37673B62C9145A0D74D4A4 /* CodexSessionService.swift in Sources */,
+				5809509062112E2DF0191FD6 /* DirectoryMutationCoordinator.swift in Sources */,
+				4854E8FF0470102D3F4796E6 /* FileStore.swift in Sources */,
+				0C85CDC8483502FE7B8114F8 /* InstancesView.swift in Sources */,
+				A006D8FDA98945FAEB4B6008 /* InstancesViewModel.swift in Sources */,
+				2366BD6F3D191F84ABC7104E /* Masking.swift in Sources */,
+				AFC2F5510CC2E5EC56100B77 /* NavigationSection.swift in Sources */,
+				83AE1B0DF9F59C1AC629AE1A /* OperationFeedback.swift in Sources */,
+				32ADD236E0452FF9329D7BCD /* Protocols.swift in Sources */,
+				56779054F022A4417347C59B /* RootView.swift in Sources */,
+				1A3BF84E4D0ECACBCE4BB018 /* RootViewModel.swift in Sources */,
+				7642DC0EEFAA4DF278367FE7 /* SQLiteStore.swift in Sources */,
+				6779434CE3A1364F6F306978 /* SessionsView.swift in Sources */,
+				E9FDC3ECC1E8EA4B115424FB /* SessionsViewModel.swift in Sources */,
+				6602905D83A88C0D1A954569 /* SwichCodexApp.swift in Sources */,
+				163A3086256C4BC1F46D3E18 /* TomlConfigStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		556D8270C43441BF4234ACC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB6D692D55EC8FC4EE7C4531 /* SwichCodex */;
+			targetProxy = 6B0B3D59A9895064F1D11651 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		086E5712EEB8A7ECDF6C9B40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		827C6D437C9A127B6EF25F43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qian.swichcodex.tests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwichCodex.app/Contents/MacOS/SwichCodex";
+			};
+			name = Release;
+		};
+		A794AD1BE8C22DC0682F11E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SwichCodex;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qian.swichcodex;
+				PRODUCT_NAME = SwichCodex;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		C97515DDF423346173AFD5BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SwichCodex;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qian.swichcodex;
+				PRODUCT_NAME = SwichCodex;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		DBE56D94F04AD5692D29D6AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		EB5CA3595479C1874B3FE151 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qian.swichcodex.tests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwichCodex.app/Contents/MacOS/SwichCodex";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B8FE640F791AD03CD01F649 /* Build configuration list for PBXNativeTarget "SwichCodex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A794AD1BE8C22DC0682F11E7 /* Debug */,
+				C97515DDF423346173AFD5BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B7DD303A6B1312C25DEF9477 /* Build configuration list for PBXProject "swichcodex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				086E5712EEB8A7ECDF6C9B40 /* Debug */,
+				DBE56D94F04AD5692D29D6AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D0EE524A7713A654071A5877 /* Build configuration list for PBXNativeTarget "SwichCodexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB5CA3595479C1874B3FE151 /* Debug */,
+				827C6D437C9A127B6EF25F43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6C1EC51D5B9E614441B66143 /* Project object */;
+}

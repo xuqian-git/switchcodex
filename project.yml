@@ -1,0 +1,42 @@
+name: swichcodex
+options:
+  bundleIdPrefix: com.qian
+  deploymentTarget:
+    macOS: "14.0"
+targets:
+  SwichCodex:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: SwichCodexApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qian.swichcodex
+        PRODUCT_NAME: SwichCodex
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+        INFOPLIST_KEY_CFBundleDisplayName: SwichCodex
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 0.1.0
+        SWIFT_VERSION: 6.0
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: YES
+        SWIFT_STRICT_CONCURRENCY: complete
+    scheme:
+      testTargets:
+        - SwichCodexTests
+  SwichCodexTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: SwichCodexTests
+    dependencies:
+      - target: SwichCodex
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qian.swichcodex.tests
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: 6.0
+
