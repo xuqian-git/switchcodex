@@ -94,7 +94,9 @@ struct MenuBarPanelView: View {
             Divider()
             accountsSection
         }
-        .padding(AppSpacing.lg)
+        .padding(.horizontal, AppSpacing.lg)
+        .padding(.bottom, AppSpacing.lg)
+        .padding(.top, AppSpacing.xl)
         .frame(width: 380, height: 520)
         .task {
             await viewModel.load()
