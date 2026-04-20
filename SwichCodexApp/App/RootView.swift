@@ -104,10 +104,6 @@ struct RootView: View {
 
     private var updatePanel: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            Text("v\(viewModel.currentVersion)")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
-
             Button {
                 Task { await viewModel.checkForUpdates() }
             } label: {
@@ -121,6 +117,9 @@ struct RootView: View {
                     Text(viewModel.isInstallingUpdate ? "正在更新…" : "检查更新")
                         .font(.system(size: 12, weight: .semibold))
                     Spacer()
+                    Text("v\(viewModel.currentVersion)")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(.secondary)
                 }
                 .padding(.horizontal, AppSpacing.sm)
                 .padding(.vertical, AppSpacing.sm)
