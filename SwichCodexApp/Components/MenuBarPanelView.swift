@@ -97,7 +97,7 @@ struct MenuBarPanelView: View {
         .padding(.horizontal, AppSpacing.lg)
         .padding(.bottom, AppSpacing.lg)
         .padding(.top, AppSpacing.xl)
-        .frame(width: 380, height: 520)
+        .frame(width: 380, height: 580)
         .task {
             await viewModel.load()
         }
@@ -180,7 +180,7 @@ struct MenuBarPanelView: View {
                         }
                     }
                 }
-                .frame(minHeight: 420, maxHeight: 420)
+                .frame(minHeight: 480, maxHeight: 480)
             }
         }
     }
