@@ -28,7 +28,13 @@ struct CodexSessionService: CodexSessionServicing, @unchecked Sendable {
             let root = URL(fileURLWithPath: instance.userDataDir)
             let dbURL = root.appendingPathComponent("state_5.sqlite")
             guard fileStore.fileExists(dbURL) else { continue }
-            let rows = try sqliteStore.readThreads(at: dbURL)
+            let rows: [ThreadRow]
+            do {
+                rows = try sqliteStore.readThreads(at: dbURL)
+            } catch {
+                AppLogger.error("Skip unreadable session database at \(dbURL.path): \(error.localizedDescription)")
+                continue
+            }
             for row in rows {
                 let location = SessionLocation(
                     instanceID: instance.id,
