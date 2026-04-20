@@ -8,6 +8,7 @@ final class MenuBarPanelViewModel: ObservableObject {
 
     private let accountService: CodexAccountServicing
     private var hasLoaded = false
+    private var autoRefreshTask: Task<Void, Never>?
 
     init(accountService: CodexAccountServicing) {
         self.accountService = accountService
@@ -76,6 +77,22 @@ final class MenuBarPanelViewModel: ObservableObject {
         }
         await load(forceRefresh: true)
     }
+
+    func startAutoRefresh() {
+        guard autoRefreshTask == nil else { return }
+        autoRefreshTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(60))
+                guard !Task.isCancelled else { break }
+                await self?.refreshAll()
+            }
+        }
+    }
+
+    func stopAutoRefresh() {
+        autoRefreshTask?.cancel()
+        autoRefreshTask = nil
+    }
 }
 
 struct MenuBarPanelView: View {
@@ -99,7 +116,11 @@ struct MenuBarPanelView: View {
         .padding(.top, AppSpacing.xl + AppSpacing.md)
         .frame(width: 380, height: 580)
         .task {
-            await viewModel.load()
+            await viewModel.load(forceRefresh: true)
+            viewModel.startAutoRefresh()
+        }
+        .onDisappear {
+            viewModel.stopAutoRefresh()
         }
     }
 

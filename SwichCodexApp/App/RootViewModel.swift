@@ -32,6 +32,7 @@ final class RootViewModel: ObservableObject {
         Task {
             await accountsViewModel.load()
         }
+        accountsViewModel.startAutoRefresh()
     }
 
     func checkForUpdates() async {

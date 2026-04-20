@@ -31,6 +31,7 @@ final class AccountsViewModel: ObservableObject {
     private let groupService: CodexGroupServicing
     private var isRefreshingMissingQuota = false
     private var feedbackDismissTask: Task<Void, Never>?
+    private var autoRefreshTask: Task<Void, Never>?
 
     init(accountService: CodexAccountServicing, groupService: CodexGroupServicing) {
         self.accountService = accountService
@@ -52,16 +53,26 @@ final class AccountsViewModel: ObservableObject {
 
     func load() async {
         do {
-            async let loadedAccounts = accountService.listAccounts()
-            async let loadedGroups = groupService.listGroups()
-            accounts = try await loadedAccounts
-            groups = try await loadedGroups
-            selectedAccountID = selectedAccountID ?? accounts.first?.id
-            selectedAccountIDs.formIntersection(Set(accounts.map(\.id)))
-            refreshMissingQuotaIfNeeded()
+            try await reloadData()
         } catch {
             showFeedback(OperationFeedback(level: .error, message: error.localizedDescription))
         }
+    }
+
+    func startAutoRefresh() {
+        guard autoRefreshTask == nil else { return }
+        autoRefreshTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(60))
+                guard !Task.isCancelled else { break }
+                await self?.performAutoRefresh()
+            }
+        }
+    }
+
+    func stopAutoRefresh() {
+        autoRefreshTask?.cancel()
+        autoRefreshTask = nil
     }
 
     func addLocalAccount() async {
@@ -220,6 +231,25 @@ final class AccountsViewModel: ObservableObject {
             } catch {
                 showFeedback(OperationFeedback(level: .error, message: error.localizedDescription))
             }
+        }
+    }
+
+    private func reloadData() async throws {
+        async let loadedAccounts = accountService.listAccounts()
+        async let loadedGroups = groupService.listGroups()
+        accounts = try await loadedAccounts
+        groups = try await loadedGroups
+        selectedAccountID = selectedAccountID ?? accounts.first?.id
+        selectedAccountIDs.formIntersection(Set(accounts.map(\.id)))
+        refreshMissingQuotaIfNeeded()
+    }
+
+    private func performAutoRefresh() async {
+        do {
+            _ = try await accountService.refreshAllAccounts()
+            try await reloadData()
+        } catch {
+            AppLogger.error("Automatic account refresh failed: \(error.localizedDescription)")
         }
     }
 
