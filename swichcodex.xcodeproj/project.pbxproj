@@ -41,6 +41,7 @@
 		D6B7A6F09494E1505F9AB1D2 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C7E63E8014227853E960C /* AccountsView.swift */; };
 		D8A8C73E14CBE219433EA561 /* AccountGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B966715995B0C894AA2BEFD /* AccountGroup.swift */; };
 		E9FDC3ECC1E8EA4B115424FB /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F96A5F6C9D05D49DD71E9 /* SessionsViewModel.swift */; };
+		EA73A5111A4C6F1100A10001 /* MenuBarPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA73A5101A4C6F1100A10001 /* MenuBarPanelView.swift */; };
 		FC2126450E6C8ECB746D1465 /* CodexProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6B853D4F0F20E2A657061 /* CodexProcessService.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		DF8C7E63E8014227853E960C /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		E7ABCA4B9F540C03056FD5E5 /* CodexInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexInstance.swift; sourceTree = "<group>"; };
 		EEA3529FD2BBAB612E9AD31F /* InstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstancesViewModel.swift; sourceTree = "<group>"; };
+		EA73A5101A4C6F1100A10001 /* MenuBarPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanelView.swift; sourceTree = "<group>"; };
 		F86DA3D98DEF8D28CBFDCA1C /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
 		FA6EEADE3705827F518F4D90 /* OperationFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFeedback.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				F86DA3D98DEF8D28CBFDCA1C /* AppComponents.swift */,
+				EA73A5101A4C6F1100A10001 /* MenuBarPanelView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				D6B7A6F09494E1505F9AB1D2 /* AccountsView.swift in Sources */,
 				CC96C2CEF3AC571AE4BBF844 /* AccountsViewModel.swift in Sources */,
 				4044056B3542F0365C2006E6 /* AppComponents.swift in Sources */,
+				EA73A5111A4C6F1100A10001 /* MenuBarPanelView.swift in Sources */,
 				35925A98741C164EC52CB852 /* AppDesign.swift in Sources */,
 				07F0EAF710F213A78D84E6F4 /* AppLogger.swift in Sources */,
 				9C584B5B006738EC842656EB /* AppPaths.swift in Sources */,
