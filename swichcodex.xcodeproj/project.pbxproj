@@ -55,8 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02E989B01A4C2F8800A10001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0076FEBE3F0AD2EB62AE52B3 /* SwichCodexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwichCodexApp.swift; sourceTree = "<group>"; };
+		02E989B01A4C2F8800A10001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		035F96A5F6C9D05D49DD71E9 /* SessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
 		1D0B14E871F25A97D32F4183 /* SQLiteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteStore.swift; sourceTree = "<group>"; };
 		1D157463E42D713336592C5B /* CodexInstanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexInstanceService.swift; sourceTree = "<group>"; };
@@ -95,6 +95,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		02E989B21A4C2F8800A10001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				02E989B01A4C2F8800A10001 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		11055431669A74002D5FFB7B /* SwichCodexTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,14 +199,6 @@
 				43FE9079333FF2567D24C104 /* Utilities */,
 			);
 			path = SwichCodexApp;
-			sourceTree = "<group>";
-		};
-		02E989B21A4C2F8800A10001 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				02E989B01A4C2F8800A10001 /* Assets.xcassets */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		AF4FF16A6F05574D7A2161E7 /* Accounts */ = {
