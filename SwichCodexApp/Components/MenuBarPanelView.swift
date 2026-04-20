@@ -95,7 +95,7 @@ struct MenuBarPanelView: View {
             accountsSection
         }
         .padding(AppSpacing.lg)
-        .frame(width: 380)
+        .frame(width: 380, height: 520)
         .task {
             await viewModel.load()
         }
@@ -178,7 +178,7 @@ struct MenuBarPanelView: View {
                         }
                     }
                 }
-                .frame(maxHeight: 320)
+                .frame(minHeight: 420, maxHeight: 420)
             }
         }
     }
