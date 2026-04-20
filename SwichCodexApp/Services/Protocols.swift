@@ -49,5 +49,8 @@ protocol CodexSessionServicing: Sendable {
 protocol AppUpdateServicing: Sendable {
     func currentVersion() -> String
     func checkForUpdates() async throws -> AppUpdateCheckResult
-    func installUpdate(from release: AppReleaseInfo) async throws
+    func installUpdate(
+        from release: AppReleaseInfo,
+        progress: @escaping @Sendable (_ fractionCompleted: Double, _ status: String) -> Void
+    ) async throws
 }

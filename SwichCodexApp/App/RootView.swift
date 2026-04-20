@@ -25,7 +25,7 @@ struct RootView: View {
             ),
             actions: {
                 Button("立即更新") {
-                    Task { await viewModel.installAvailableUpdate() }
+                    viewModel.beginInstallAvailableUpdate()
                 }
                 Button("取消", role: .cancel) {
                     viewModel.dismissUpdatePrompt()
@@ -124,7 +124,7 @@ struct RootView: View {
                 .padding(.horizontal, AppSpacing.sm)
                 .padding(.vertical, AppSpacing.sm)
                 .frame(maxWidth: .infinity)
-                .background(AppSemanticColor.mutedFill)
+                .background(buttonBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             .buttonStyle(.plain)
@@ -137,6 +137,29 @@ struct RootView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+    }
+
+    private var buttonBackground: some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(AppSemanticColor.mutedFill)
+
+            GeometryReader { proxy in
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(updateProgressColor)
+                    .frame(width: proxy.size.width * max(0, min(viewModel.updateProgress, 1)))
+            }
+        }
+    }
+
+    private var updateProgressColor: Color {
+        if viewModel.isInstallingUpdate {
+            return Color.accentColor.opacity(0.28)
+        }
+        if viewModel.isCheckingForUpdates {
+            return Color.accentColor.opacity(0.16)
+        }
+        return .clear
     }
 
     @ViewBuilder

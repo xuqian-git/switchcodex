@@ -46,13 +46,19 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
         return .upToDate(currentVersion: current)
     }
 
-    func installUpdate(from release: AppReleaseInfo) async throws {
+    func installUpdate(
+        from release: AppReleaseInfo,
+        progress: @escaping @Sendable (_ fractionCompleted: Double, _ status: String) -> Void
+    ) async throws {
         guard let asset = release.primaryDMGAsset else {
             throw AppUpdateServiceError.missingDMGAsset
         }
 
-        let downloadedDMG = try await downloadDMG(from: asset.downloadURL)
+        progress(0.02, "准备下载 \(release.version)…")
+        let downloadedDMG = try await downloadDMG(from: asset.downloadURL, progress: progress)
+        progress(0.82, "正在挂载更新包…")
         let mountedVolume = try mountDMG(at: downloadedDMG)
+        progress(0.9, "正在准备安装…")
         let sourceApp = try locateAppBundle(in: mountedVolume)
         let targetApp = installTargetURL()
         let scriptURL = try writeInstallerScript(
@@ -63,6 +69,7 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
         )
 
         try launchInstallerScript(at: scriptURL, sourceApp: sourceApp, targetApp: targetApp, mountPoint: mountedVolume, downloadedDMG: downloadedDMG)
+        progress(1.0, "安装脚本已启动，应用即将重启…")
 
         DispatchQueue.main.async {
             NSApplication.shared.terminate(nil)
@@ -83,15 +90,15 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
         return try JSONDecoder().decode(AppReleaseInfo.self, from: data)
     }
 
-    private func downloadDMG(from url: URL) async throws -> URL {
+    private func downloadDMG(
+        from url: URL,
+        progress: @escaping @Sendable (_ fractionCompleted: Double, _ status: String) -> Void
+    ) async throws -> URL {
         var request = URLRequest(url: url)
         request.setValue("application/octet-stream", forHTTPHeaderField: "Accept")
         request.setValue("SwichCodex/\(currentVersion())", forHTTPHeaderField: "User-Agent")
 
-        let (temporaryURL, response) = try await session.download(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, (200 ... 299).contains(httpResponse.statusCode) else {
-            throw AppUpdateServiceError.invalidResponse
-        }
+        let (temporaryURL, _) = try await downloadWithProgress(request: request, progress: progress)
 
         let destination = FileManager.default.temporaryDirectory
             .appendingPathComponent("SwichCodex-\(UUID().uuidString).dmg")
@@ -100,6 +107,36 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
         }
         try FileManager.default.moveItem(at: temporaryURL, to: destination)
         return destination
+    }
+
+    private func downloadWithProgress(
+        request: URLRequest,
+        progress: @escaping @Sendable (_ fractionCompleted: Double, _ status: String) -> Void
+    ) async throws -> (URL, URLResponse) {
+        let delegate = DownloadProgressDelegate(progress: progress)
+        let session = URLSession(configuration: .default, delegate: delegate, delegateQueue: nil)
+        defer { session.invalidateAndCancel() }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let task = session.downloadTask(with: request) { url, response, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+
+                guard let url, let response,
+                      let httpResponse = response as? HTTPURLResponse,
+                      (200 ... 299).contains(httpResponse.statusCode) else {
+                    continuation.resume(throwing: AppUpdateServiceError.invalidResponse)
+                    return
+                }
+
+                continuation.resume(returning: (url, response))
+            }
+            delegate.attach(task: task)
+            progress(0.05, "开始下载更新包…")
+            task.resume()
+        }
     }
 
     private func mountDMG(at url: URL) throws -> URL {
@@ -217,4 +254,38 @@ struct AppUpdateService: AppUpdateServicing, @unchecked Sendable {
                 Int(component.filter(\.isNumber)) ?? 0
             }
     }
+}
+
+private final class DownloadProgressDelegate: NSObject, URLSessionDownloadDelegate {
+    private let progressHandler: @Sendable (Double, String) -> Void
+
+    init(progress: @escaping @Sendable (Double, String) -> Void) {
+        progressHandler = progress
+    }
+
+    func attach(task _: URLSessionTask) {}
+
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    ) {
+        guard totalBytesExpectedToWrite > 0 else {
+            progressHandler(0.35, "正在下载更新包…")
+            return
+        }
+
+        let rawFraction = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+        let mappedFraction = 0.05 + min(max(rawFraction, 0), 1) * 0.75
+        let percent = Int(rawFraction * 100)
+        progressHandler(mappedFraction, "正在下载更新包…\(percent)%")
+    }
+
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
+    ) {}
 }

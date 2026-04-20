@@ -6,6 +6,7 @@ final class RootViewModel: ObservableObject {
     @Published var updateStatusMessage: String?
     @Published var isCheckingForUpdates = false
     @Published var isInstallingUpdate = false
+    @Published var updateProgress: Double = 0
     @Published var availableUpdate: AppReleaseInfo?
     @Published var updateErrorMessage: String?
 
@@ -15,6 +16,7 @@ final class RootViewModel: ObservableObject {
     let currentVersion: String
 
     private let updateService: AppUpdateServicing
+    private var pendingInstallRelease: AppReleaseInfo?
     init(
         accountsViewModel: AccountsViewModel,
         instancesViewModel: InstancesViewModel,
@@ -37,6 +39,7 @@ final class RootViewModel: ObservableObject {
         isCheckingForUpdates = true
         updateErrorMessage = nil
         updateStatusMessage = nil
+        updateProgress = 0
         defer { isCheckingForUpdates = false }
 
         do {
@@ -54,21 +57,37 @@ final class RootViewModel: ObservableObject {
     }
 
     func installAvailableUpdate() async {
-        guard let availableUpdate, !isInstallingUpdate else { return }
-        isInstallingUpdate = true
-        updateErrorMessage = nil
-        updateStatusMessage = "正在下载并安装 \(availableUpdate.version)…"
-        defer { isInstallingUpdate = false }
+        guard let release = pendingInstallRelease, isInstallingUpdate else { return }
 
         do {
-            try await updateService.installUpdate(from: availableUpdate)
+            try await updateService.installUpdate(from: release) { [weak self] fractionCompleted, status in
+                Task { @MainActor in
+                    self?.updateProgress = min(max(fractionCompleted, 0), 1)
+                    self?.updateStatusMessage = status
+                }
+            }
         } catch {
+            isInstallingUpdate = false
+            updateProgress = 0
+            self.pendingInstallRelease = nil
             updateErrorMessage = error.localizedDescription
             updateStatusMessage = nil
         }
     }
 
+    func beginInstallAvailableUpdate() {
+        guard let availableUpdate, !isInstallingUpdate else { return }
+        isInstallingUpdate = true
+        pendingInstallRelease = availableUpdate
+        updateErrorMessage = nil
+        updateStatusMessage = "正在准备安装 \(availableUpdate.version)…"
+        updateProgress = 0.02
+        self.availableUpdate = nil
+        Task { await installAvailableUpdate() }
+    }
+
     func dismissUpdatePrompt() {
+        guard !isInstallingUpdate else { return }
         availableUpdate = nil
     }
 
