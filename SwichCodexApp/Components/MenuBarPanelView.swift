@@ -96,7 +96,7 @@ struct MenuBarPanelView: View {
         }
         .padding(.horizontal, AppSpacing.lg)
         .padding(.bottom, AppSpacing.lg)
-        .padding(.top, AppSpacing.xl)
+        .padding(.top, AppSpacing.xl + AppSpacing.md)
         .frame(width: 380, height: 580)
         .task {
             await viewModel.load()
