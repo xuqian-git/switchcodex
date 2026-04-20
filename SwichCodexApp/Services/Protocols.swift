@@ -45,3 +45,9 @@ protocol CodexSessionServicing: Sendable {
     func listTrash() async throws -> [TrashedSession]
     func restoreFromTrash(sessionIDs: [String]) async throws -> OperationFeedback
 }
+
+protocol AppUpdateServicing: Sendable {
+    func currentVersion() -> String
+    func checkForUpdates() async throws -> AppUpdateCheckResult
+    func installUpdate(from release: AppReleaseInfo) async throws
+}
