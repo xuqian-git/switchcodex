@@ -14,8 +14,6 @@ struct MenuBarPanelView: View {
             header
             Divider()
             accountsSection
-            Divider()
-            footerActions
         }
         .padding(AppSpacing.lg)
         .frame(width: 380)
@@ -44,6 +42,22 @@ struct MenuBarPanelView: View {
             Spacer()
 
             Button {
+                rootViewModel.selection = .accounts
+                NSApp.activate(ignoringOtherApps: true)
+                openWindow(id: "main")
+            } label: {
+                Text("主界面")
+            }
+            .buttonStyle(.bordered)
+
+            Button(role: .destructive) {
+                NSApplication.shared.terminate(nil)
+            } label: {
+                Text("退出")
+            }
+            .buttonStyle(.bordered)
+
+            Button {
                 Task { await accountsViewModel.refreshAll() }
             } label: {
                 Image(systemName: "arrow.clockwise")
@@ -60,11 +74,15 @@ struct MenuBarPanelView: View {
                 .foregroundStyle(.secondary)
 
             if accountsViewModel.accounts.isEmpty {
-                Text("暂无账号")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, AppSpacing.sm)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("暂无账号")
+                        .font(.system(size: 12, weight: .medium))
+                    Text("如果你刚启动应用，账号列表会在后台自动加载。")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, AppSpacing.sm)
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.sm) {
@@ -147,28 +165,6 @@ struct MenuBarPanelView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(account.isCurrent ? Color.accentColor.opacity(0.08) : AppSemanticColor.mutedFill.opacity(0.55))
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-    }
-
-    private var footerActions: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            Button {
-                rootViewModel.selection = .accounts
-                NSApp.activate(ignoringOtherApps: true)
-                openWindow(id: "main")
-            } label: {
-                Label("打开主面板", systemImage: "rectangle.on.rectangle")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .buttonStyle(.bordered)
-
-            Button(role: .destructive) {
-                NSApplication.shared.terminate(nil)
-            } label: {
-                Label("退出软件", systemImage: "power")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .buttonStyle(.bordered)
-        }
     }
 
     private func quotaColor(_ tone: CodexQuotaTone) -> Color {

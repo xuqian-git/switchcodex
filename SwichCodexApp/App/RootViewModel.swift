@@ -16,6 +16,10 @@ final class RootViewModel: ObservableObject {
         self.accountsViewModel = accountsViewModel
         self.instancesViewModel = instancesViewModel
         self.sessionsViewModel = sessionsViewModel
+
+        Task {
+            await accountsViewModel.load()
+        }
     }
 
     static func live() -> RootViewModel {
@@ -60,4 +64,3 @@ final class RootViewModel: ObservableObject {
         )
     }
 }
-
